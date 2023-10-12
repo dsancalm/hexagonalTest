@@ -1,0 +1,72 @@
+openapi: 3.0.3
+info:
+  title: Prueba tecnica Indra
+  version: 1.0.0
+tags:
+  - name: Prices
+paths:
+  /price:
+    get:
+      tags:
+        - Prices
+      summary: Recupera el precio
+      description: Recupera el precio del producto dada una fecha, un identificador de marca y un identificador de producto
+      operationId: findPriceByDateBrandProduct
+      parameters:
+        - name: idBrand
+          in: query
+          description: Id de la marca a buscar el precio
+          required: true
+          explode: false
+          schema:
+            type: integer
+        - name: idProduct
+          in: query
+          description: Id del producto a buscar
+          required: true
+          explode: false
+          schema:
+            type: integer
+        - name: fecha
+          in: query
+          description: Fecha
+          required: true
+          explode: false
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Prices'
+        '400':
+          description: Invalid status value
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Prices:
+      type: object
+      properties:
+        idProduct:
+          type: integer
+          format: int32
+        idBrand:
+          type: integer
+          format: int32
+        fee:
+          type: integer
+          format: int32
+        date:
+          type: string
+          format: date-time
+        finalPrice:
+          type: number
+          format : float
