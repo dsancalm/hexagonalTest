@@ -19,6 +19,14 @@ public class PricesDAOImpl implements PricesDAO {
 	@Autowired
 	private PricesMapper pricesMapper;
 
+	/**
+	 * Busca los precios filtrando por id de marca, id de producrto y una fecha
+	 *
+	 * @param fecha the fecha
+	 * @param idBrand the id brand
+	 * @param idProduct the id product
+	 * @return the list
+	 */
 	@Override
 	public List<Prices> findByDateAndIdBrandAndIdProduct(Date fecha, Long idBrand, Long idProduct) {
 		return pricesMapper.toDomain(pricesRepository.findByStartDateLessThanEqualAndEndDateGreaterThanEqualAndBrand_IdAndProduct_Id(fecha, fecha, idBrand, idProduct));

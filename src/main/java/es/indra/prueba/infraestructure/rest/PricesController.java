@@ -29,6 +29,18 @@ public class PricesController implements PriceApi {
 	//default time zone
 	private ZoneId defaultZoneId = ZoneId.systemDefault();
 	
+    /**
+     * GET /price : Recupera el precio
+     * Recupera el precio del producto dada una fecha, un identificador de marca y un identificador de producto
+     *
+     * @param idBrand Id de la marca a buscar el precio (required)
+     * @param idProduct Id del producto a buscar (required)
+     * @param fecha Fecha (required)
+     * @return successful operation (status code 200)
+     *         or Invalid status value (status code 400)
+     *         or Not found (status code 404)
+     *         or Internal server error (status code 500)
+     */
 	@Override
 	public ResponseEntity<PricesDto> findPriceByDateBrandProduct(Integer idBrand, Integer idProduct,
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fecha) {

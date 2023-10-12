@@ -69,9 +69,9 @@ public interface PriceApi {
         produces = { "application/json" }
     )
     default ResponseEntity<PricesDto> findPriceByDateBrandProduct(
-        @NotNull @Parameter(name = "idBrand", description = "Id de la marca a buscar el precio", required = true) @Valid @RequestParam(value = "idBrand", required = true) Integer idBrand,
-        @NotNull @Parameter(name = "idProduct", description = "Id del producto a buscar", required = true) @Valid @RequestParam(value = "idProduct", required = true) Integer idProduct,
-        @NotNull @Parameter(name = "fecha", description = "Fecha", required = true) @Valid @RequestParam(value = "fecha", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fecha
+        @NotNull @Parameter(name = "idBrand", description = "Id de la marca a buscar el precio", required = true, example = "1") @Valid @RequestParam(value = "idBrand", required = true) Integer idBrand,
+        @NotNull @Parameter(name = "idProduct", description = "Id del producto a buscar", required = true, example = "35455") @Valid @RequestParam(value = "idProduct", required = true) Integer idProduct,
+        @NotNull @Parameter(name = "fecha", description = "Fecha", required = true, example = "2020-06-14T10:00:00") @Valid @RequestParam(value = "fecha", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fecha
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {

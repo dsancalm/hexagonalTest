@@ -1,3 +1,4 @@
+
 package es.indra.prueba.application.impl;
 
 import java.util.Date;
@@ -12,13 +13,28 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+
+/**
+ * The Class PricesServiceImpl.
+ */
 @RequiredArgsConstructor
 @Slf4j
 public class PricesServiceImpl implements PricesService {
 	
+	/** The price DAO. */
 	@NonNull
 	private final PricesDAO priceDAO;
 
+	/**
+	 * Recupera una lista de precios dado un id de producto, de cadena y una fecha.
+	 * De la lista recuperada devuelve el precio con mayor prioridad
+	 *
+	 * @param fecha      the fecha
+	 * @param idCadena   the id cadena
+	 * @param idProducto the id producto
+	 * @return El precio mas prioritario o el unico recuperado
+	 * @throws PricesServiceException Si no recupera ningun tipo de precio
+	 */
 	@Override
 	public Prices recuperaPrecioMasPrioritario(Date fecha, Long idCadena, Long idProducto) throws PricesServiceException {
 		log.info(String.format("Recuperando precio con los argumentos: %tc %d %d", fecha, idCadena, idProducto));

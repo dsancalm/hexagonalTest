@@ -7,6 +7,9 @@ import es.indra.prueba.application.impl.PricesServiceImpl;
 import es.indra.prueba.application.interfaces.PricesDAO;
 import es.indra.prueba.application.interfaces.PricesService;
 
+/**
+ * Configuracion para inicializar la capa de aplicacion
+ */
 @Configuration
 public class ConfiguracionAplicacion {
 
