@@ -11,11 +11,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedAttributeNode;
+import jakarta.persistence.NamedEntityGraph;
+import jakarta.persistence.NamedEntityGraphs;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
 @Table(name = "PRICES")
+@NamedEntityGraphs(value = { @NamedEntityGraph(name = "PricesEntity.Full", attributeNodes = {
+		@NamedAttributeNode("brand"), @NamedAttributeNode("product") }) })
 @Data
 public class PricesEntity {
 
