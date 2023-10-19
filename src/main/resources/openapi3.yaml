@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Prueba tecnica Indra
+  title: Prueba tecnica
   version: 1.0.0
 tags:
   - name: Prices
