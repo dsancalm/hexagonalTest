@@ -158,13 +158,6 @@
 							<modelNameSuffix>Dto</modelNameSuffix>
 							<generateSupportingFiles>false</generateSupportingFiles>
 
-							<typeMappings>
-								<typeMapping>OffsetDateTime=java.time.LocalDateTime</typeMapping>
-							</typeMappings>
-							<importMappings>
-								<importMapping>
-									java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
-							</importMappings>
 							<skipValidateSpec>true</skipValidateSpec>
 							<configOptions>
 								<sourceFolder>/</sourceFolder>
@@ -177,7 +170,7 @@
 									es.hexagonalTest.prueba.infraestructure.rest.api</apiPackage>
 
 								<!-- Use modern java8 date/time api -->
-								<dateLibrary>java8</dateLibrary>
+								<dateLibrary>java8-localdatetime</dateLibrary>
 								<java8>true</java8>
 								<oas3>true</oas3>
 								<useSpringController>true</useSpringController>
