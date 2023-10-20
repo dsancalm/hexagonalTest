@@ -9,7 +9,7 @@ Esta documentación proporciona instrucciones detalladas sobre cómo compilar, a
 1. **Clonar el Repositorio:**
    ```bash
    git clone 
-   cd prueba
+   cd hexagonalTest
    ```
 
 2. **Compilar el Proyecto:**
