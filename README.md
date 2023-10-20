@@ -29,7 +29,7 @@ Esta documentación proporciona instrucciones detalladas sobre cómo compilar, a
 
 Con el siguiente comando, el proyecto se despliega automaticamente y realiza los 5 test definidos en 'SpringRestTest.java'
 
-1. **Ejecutar Pruebas Unitarias:**
+1. **Ejecutar Pruebas Integrales/Unitarias:**
    ```bash
    mvn test
    ```
