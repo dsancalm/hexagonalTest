@@ -12,6 +12,8 @@ paths:
       summary: Recupera el precio
       description: Recupera el precio del producto dada una fecha, un identificador de marca y un identificador de producto
       operationId: findPriceByDateBrandProduct
+      security:
+        - basicAuth: []
       parameters:
         - name: idBrand
           in: query
@@ -48,6 +50,9 @@ paths:
                 $ref: '#/components/schemas/Prices'
         '400':
           description: Invalid status value
+        '401':
+          description: Autenticacion incorrecta
+          $ref: '#/components/responses/UnauthorizedError'
         '404':
           description: Not found
         '500':
@@ -72,3 +77,14 @@ components:
         finalPrice:
           type: number
           format : float
+  securitySchemes:
+    basicAuth:     # <-- arbitrary name for the security scheme
+      type: http
+      scheme: basic
+  responses:
+    UnauthorizedError:
+      description: El user/pass es incorrecto
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
