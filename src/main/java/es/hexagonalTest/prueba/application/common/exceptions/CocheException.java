@@ -1,13 +1,12 @@
 package es.hexagonalTest.prueba.application.common.exceptions;
 
-import es.hexagonalTest.prueba.application.interfaces.PricesService;
 import lombok.experimental.StandardException;
 
 /**
  * Excepcion para el servicio {@link PricesService}
  */
 @StandardException
-public class PricesServiceException extends Exception{
+public class CocheException extends Exception{
 
 	/**
 	 * 

@@ -3,9 +3,9 @@ package es.hexagonalTest.prueba.infraestructure.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import es.hexagonalTest.prueba.application.impl.PricesServiceImpl;
-import es.hexagonalTest.prueba.application.interfaces.PricesDAO;
-import es.hexagonalTest.prueba.application.interfaces.PricesService;
+import es.hexagonalTest.prueba.application.impl.CocheServiceImpl;
+import es.hexagonalTest.prueba.application.interfaces.CocheDAO;
+import es.hexagonalTest.prueba.application.interfaces.CocheService;
 
 /**
  * Configuracion para inicializar la capa de aplicacion
@@ -14,7 +14,7 @@ import es.hexagonalTest.prueba.application.interfaces.PricesService;
 public class ConfiguracionAplicacion {
 
     @Bean
-    PricesService userService(PricesDAO dao) {
-		return new PricesServiceImpl(dao);
+    CocheService cocheService(CocheDAO dao) {
+		return new CocheServiceImpl(dao);
 	}
 }

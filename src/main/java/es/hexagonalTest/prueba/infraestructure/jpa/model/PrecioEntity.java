@@ -36,6 +36,6 @@ public class PrecioEntity implements Serializable{
 	private BigDecimal price;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "coches_id", nullable = false, updatable = false)
+	@JoinColumn(name = "coches_id", nullable = false, updatable = false, insertable = false)
 	private CocheEntity coche;
 }

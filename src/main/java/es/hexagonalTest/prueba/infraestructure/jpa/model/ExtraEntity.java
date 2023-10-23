@@ -31,7 +31,7 @@ public class ExtraEntity implements Serializable{
 	private String nombre;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "coches_id", nullable = false, updatable = false)
+	@JoinColumn(name = "coches_id", nullable = false, updatable = false, insertable = false)
 	private CocheEntity coche;
 
 }

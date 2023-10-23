@@ -45,7 +45,7 @@ public class CocheEntity implements Serializable {
 	private List<ExtraEntity> extras;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "marca_id", nullable = false, updatable = false)
+	@JoinColumn(name = "marca_id", nullable = false, updatable = false, insertable = false)
 	private MarcaEntity marca;
 
 }

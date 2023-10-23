@@ -7,6 +7,8 @@ import lombok.Data;
 @Data
 public class Coche {
 	
+	private Long id;
+	
 	private String nombreModelo;
 	
 	private String color;
