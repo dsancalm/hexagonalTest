@@ -1,0 +1,179 @@
+openapi: 3.0.3
+info:
+  title: Prueba tecnica
+  version: 1.0.0
+tags:
+  - name: Coches
+paths:
+  /coches:
+    get:
+      tags:
+        - Coches
+      summary: Recupera todos los coches disponibles
+      description: Recupera todos los coches disponibles en el sistema
+      operationId: findAll
+      security:
+        - basicAuth: []
+      responses:
+        '200':
+          description: Operacion con exito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Coche'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+        - Coches
+      summary: Inserta un coche en el sistema
+      description: Inserta un coche en el sistema
+      operationId: insertCoche
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Coche'
+      responses:
+        '200':
+          description: Operacion con exito
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Coche'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+        - Coches
+      summary: Actualiza un coche en el sistema
+      description: Actualiza un coche en el sistema
+      operationId: updateCoche
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Coche'
+      responses:
+        '200':
+          description: Operacion con exito
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Coche'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+  /coches/{id}:
+    delete:
+      tags:
+        - Coches
+      summary: Borra un coche en el sistema
+      description: Borra un coche en el sistema
+      operationId: deleteCoche
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: id del coche a borrar
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Operacion con exito
+        '400':
+          description: Id del coche no valido
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Precio:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        precio:
+          type: number
+          format : float
+        coche:
+          $ref: '#/components/schemas/Coche'
+    Marca:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+    Extra:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        coche:
+          $ref: '#/components/schemas/Coche'
+    Coche:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        modelo:
+          type: string
+        color:
+          type: string
+        cilindrada:
+          type: integer
+          format: int32
+        potencia:
+          type: integer
+          format: int32
+        extras:
+          type: array
+          items:
+            $ref: '#/components/schemas/Extra'
+        precios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Precio'
+        marca:
+          $ref: '#/components/schemas/Marca'
+  securitySchemes:
+    basicAuth:     # <-- arbitrary name for the security scheme
+      type: http
+      scheme: basic
+  responses:
+    UnauthorizedError:
+      description: Autenticacion incorrecta
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
