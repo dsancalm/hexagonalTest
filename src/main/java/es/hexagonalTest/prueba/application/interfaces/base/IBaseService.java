@@ -1,15 +1,13 @@
 package es.hexagonalTest.prueba.application.interfaces.base;
 
-import java.util.List;
-
-import es.hexagonalTest.prueba.application.common.exceptions.ServiceException;
+import es.hexagonalTest.prueba.application.common.responses.ResponseService;
 
 public interface IBaseService<T> {
-	T save(T domain);
+	ResponseService<T> save(T domain);
 
-	T update(T domain);
+	ResponseService<T> update(T domain);
 
-	int remove(T domain) throws ServiceException;
+	ResponseService<T> remove(T domain);
 
-	List<T> findAll();
+	ResponseService<T> findAll();
 }

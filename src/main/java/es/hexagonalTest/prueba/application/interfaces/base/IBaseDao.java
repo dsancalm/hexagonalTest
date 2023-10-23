@@ -9,7 +9,7 @@ public interface IBaseDao<T> {
 
 	T update(T entity) throws DaoException;
 
-	int remove(T entity) throws DaoException;
+	void remove(T entity) throws DaoException;
 
 	List<T> findAll();
 }

@@ -3,14 +3,15 @@ package es.hexagonalTest.prueba.application.common.exceptions;
 import lombok.experimental.StandardException;
 
 /**
- * Excepcion generica para el Servicio
+ * Excepcion generica para el DAO
  */
 @StandardException
-public class ServiceException extends Exception{
+public class DeleteException extends DaoException{
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2632953656713668866L;
+	private static final long serialVersionUID = 2599664201055594332L;
+	
 
 }

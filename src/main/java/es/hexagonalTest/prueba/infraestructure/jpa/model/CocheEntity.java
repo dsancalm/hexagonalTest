@@ -3,6 +3,7 @@ package es.hexagonalTest.prueba.infraestructure.jpa.model;
 import java.io.Serializable;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -48,8 +49,8 @@ public class CocheEntity implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "coche", orphanRemoval = true)
 	private List<ExtraEntity> extras;
 
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "MARCA_ID", nullable = false, updatable = false, insertable = false)
+	@ManyToOne(optional = false, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "MARCA_ID", nullable = false, updatable = false, insertable = true)
 	private MarcaEntity marca;
 
 }

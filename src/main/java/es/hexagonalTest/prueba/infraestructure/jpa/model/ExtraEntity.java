@@ -2,6 +2,7 @@ package es.hexagonalTest.prueba.infraestructure.jpa.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class ExtraEntity implements Serializable{
 	@Column(name = "NOMBRE")
 	private String nombre;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "COCHES_ID", nullable = false, updatable = false, insertable = true)
 	private CocheEntity coche;
 

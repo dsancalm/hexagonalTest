@@ -1,47 +1,67 @@
 package es.hexagonalTest.prueba.application.impl.base;
 
-import java.util.List;
-
+import es.hexagonalTest.prueba.application.common.Errors;
 import es.hexagonalTest.prueba.application.common.exceptions.DaoException;
-import es.hexagonalTest.prueba.application.common.exceptions.ServiceException;
+import es.hexagonalTest.prueba.application.common.exceptions.DeleteException;
+import es.hexagonalTest.prueba.application.common.exceptions.SaveException;
+import es.hexagonalTest.prueba.application.common.exceptions.UpdateException;
+import es.hexagonalTest.prueba.application.common.responses.ResponseService;
 import es.hexagonalTest.prueba.application.interfaces.base.IBaseDao;
 import es.hexagonalTest.prueba.application.interfaces.base.IBaseService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public abstract class BaseServiceImpl<T> implements IBaseService<T> {
-	
+
 	protected abstract IBaseDao<T> getDefaultDao();
 
 	@Override
-	public T save(T domain) {
+	public ResponseService<T> save(T domain) {
 		log.debug("Entrando en el metodo 'save' con el objeto: " + domain);
-		return this.getDefaultDao().save(domain);
+		ResponseService<T> respuesta = new ResponseService<>();
+		try {
+			respuesta.setData(this.getDefaultDao().save(domain));
+			return respuesta;
+		} catch (SaveException e) {
+			return new ResponseService<>(Errors.ERROR_SAVE);
+		} catch (DaoException e) {
+			return new ResponseService<>(Errors.ERROR_GENERIC);
+		}
 	}
 
 	@Override
-	public T update(T domain) {
+	public ResponseService<T> update(T domain) {
 		log.debug("Entrando en el metodo 'update' con el objeto: " + domain);
-		return this.getDefaultDao().update(domain);
+		ResponseService<T> respuesta = new ResponseService<>();
+		try {
+			respuesta.setData(this.getDefaultDao().update(domain));
+			return respuesta;
+		} catch (UpdateException e) {
+			return new ResponseService<>(Errors.ERROR_UPDATE);
+		} catch (DaoException e) {
+			return new ResponseService<>(Errors.ERROR_GENERIC);
+		}
 	}
 
 	@Override
-	public int remove(T domain) throws ServiceException {
+	public ResponseService<T> remove(T domain) {
 		log.debug("Entrando en el metodo 'remove' con el objeto: " + domain);
 		try {
 			this.getDefaultDao().remove(domain);
+		} catch (DeleteException e) {
+			return new ResponseService<>(Errors.ERROR_DELETE);
 		} catch (DaoException e) {
-			log.debug("Fallo en el borrado");
-			throw new ServiceException("Fallo en el borrado");
+			return new ResponseService<>(Errors.ERROR_GENERIC);
 		}
-		return 0;
+		return new ResponseService<>();
 	}
 
 	@Override
-	public List<T> findAll() {
+	public ResponseService<T> findAll() {
 		log.debug("Entrando en el metodo 'findAll'");
-		return getDefaultDao().findAll();
+		ResponseService<T> respuesta = new ResponseService<>();
+		respuesta.setListData(getDefaultDao().findAll());
+		return respuesta;
 	}
-
 
 }

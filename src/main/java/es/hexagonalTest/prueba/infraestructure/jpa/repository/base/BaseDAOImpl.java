@@ -4,15 +4,20 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 
 import es.hexagonalTest.prueba.application.common.exceptions.DaoException;
+import es.hexagonalTest.prueba.application.common.exceptions.DeleteException;
+import es.hexagonalTest.prueba.application.common.exceptions.SaveException;
+import es.hexagonalTest.prueba.application.common.exceptions.UpdateException;
 import es.hexagonalTest.prueba.application.interfaces.base.IBaseDao;
 import es.hexagonalTest.prueba.infraestructure.jpa.mapper.base.BaseMapperEntity;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public abstract class BaseDAOImpl<T, S extends Serializable> implements IBaseDao<T> {
+
+	private static final String ERROR = "Error";
 
 	protected abstract JpaRepository<S, Long> getRepository();
 
@@ -24,12 +29,12 @@ public abstract class BaseDAOImpl<T, S extends Serializable> implements IBaseDao
 		try {
 			S saved = this.getRepository().save(this.getDefaultMapper().domainToEntity(entity));
 			return this.getDefaultMapper().entityToDomain(saved);
-		} catch (EntityNotFoundException e) {
+		} catch (JpaObjectRetrievalFailureException e) {
 			log.error("Error al generar la entidad: " + entity, e);
-			throw new DaoException("Error al generar la entidad: " + entity);
+			throw new SaveException("Error al generar la entidad: " + entity);
 		} catch (Exception e) {
-			log.error("Error", e);
-			throw new DaoException("Error" + entity);
+			log.error(ERROR, e);
+			throw new DaoException(ERROR + entity);
 		}
 
 	}
@@ -40,25 +45,24 @@ public abstract class BaseDAOImpl<T, S extends Serializable> implements IBaseDao
 		try {
 			S updated = this.getRepository().save(this.getDefaultMapper().domainToEntity(entity));
 			return this.getDefaultMapper().entityToDomain(updated);
-		} catch (EntityNotFoundException e) {
+		} catch (JpaObjectRetrievalFailureException e) {
 			log.error("Error al actualizar la entidad: " + entity, e);
-			throw new DaoException("Error al actualizar la entidad: " + entity);
+			throw new UpdateException("Error al actualizar la entidad: " + entity);
 		} catch (Exception e) {
-			log.error("Error", e);
-			throw new DaoException("Error" + entity);
+			log.error(ERROR, e);
+			throw new DaoException(ERROR + entity);
 		}
 	}
 
 	@Override
-	public int remove(T entity) throws DaoException {
+	public void remove(T entity) throws DaoException {
 		log.debug("Entrando en el metodo 'remove' con el objeto: " + entity);
 		try {
 			this.getRepository().delete(this.getDefaultMapper().domainToEntity(entity));
 		} catch (Exception e) {
 			log.error("Error al borrar la entidad: " + entity, e);
-			throw new DaoException("Error al borrar la entidad: " + entity);
+			throw new DeleteException("Error al borrar la entidad: " + entity);
 		}
-		return 0;
 	}
 
 	@Override
