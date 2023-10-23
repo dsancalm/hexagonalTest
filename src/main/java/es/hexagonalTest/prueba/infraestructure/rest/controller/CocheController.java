@@ -44,7 +44,7 @@ public class CocheController implements CochesApi {
 	}
 
 	@Override
-	public ResponseEntity<List<CocheResponseDto>> findAll() {
+	public ResponseEntity<List<CocheResponseDto>> findAllCoches() {
 		ResponseService<Coche> respuestaServicio = service.findAll();
 		if (respuestaServicio.hasError()) {
 			return ResponseEntity.internalServerError().header(ERROR_CODE, respuestaServicio.getErrorCode().getCode()).build();

@@ -4,6 +4,9 @@ info:
   version: 1.0.0
 tags:
   - name: Coches
+  - name: Extras
+  - name: Marcas
+  - name: Precios
 paths:
   /coches:
     get:
@@ -11,7 +14,7 @@ paths:
         - Coches
       summary: Recupera todos los coches disponibles
       description: Recupera todos los coches disponibles en el sistema
-      operationId: findAll
+      operationId: findAllCoches
       security:
         - basicAuth: []
       responses:
@@ -97,6 +100,294 @@ paths:
           description: Operacion con exito
         '400':
           description: Id del coche no valido
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+  /extras:
+    get:
+      tags:
+        - Extras
+      summary: Recupera todos los extras disponibles
+      description: Recupera todos los extras disponibles en el sistema
+      operationId: findAllExtras
+      security:
+        - basicAuth: []
+      responses:
+        '200':
+          description: Operacion con exito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExtraResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+        - Extras
+      summary: Inserta un extra en el sistema
+      description: Inserta un extra en el sistema
+      operationId: insertExtra
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExtraRequest'
+      responses:
+        '200':
+          description: Operacion con exito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtraResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+        - Extras
+      summary: Actualiza un extra en el sistema
+      description: Actualiza un extra en el sistema
+      operationId: updateExtra
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExtraRequest'
+      responses:
+        '200':
+          description: Operacion con exito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtraResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+  /extras/{id}:
+    delete:
+      tags:
+        - Extras
+      summary: Borra un extra en el sistema
+      description: Borra un extra en el sistema
+      operationId: deleteExtra
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: id del extra a borrar
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Operacion con exito
+        '400':
+          description: Id del extra no valido
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+  /precios:
+    get:
+      tags:
+        - Precios
+      summary: Recupera todos los precios disponibles
+      description: Recupera todos los precios disponibles en el sistema
+      operationId: findAllPrecios
+      security:
+        - basicAuth: []
+      responses:
+        '200':
+          description: Operacion con exito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PrecioResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+        - Precios
+      summary: Inserta un precio en el sistema
+      description: Inserta un precio en el sistema
+      operationId: insertPrecio
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrecioRequest'
+      responses:
+        '200':
+          description: Operacion con exito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrecioResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+        - Precios
+      summary: Actualiza un precio en el sistema
+      description: Actualiza un precio en el sistema
+      operationId: updatePrecio
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrecioRequest'
+      responses:
+        '200':
+          description: Operacion con exito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrecioResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+  /precios/{id}:
+    delete:
+      tags:
+        - Precios
+      summary: Borra un precio en el sistema
+      description: Borra un precio en el sistema
+      operationId: deletePrecio
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: id del precio a borrar
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Operacion con exito
+        '400':
+          description: Id del precio no valido
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+  /marcas:
+    get:
+      tags:
+        - Marcas
+      summary: Recupera todos los marcas disponibles
+      description: Recupera todos los marcas disponibles en el sistema
+      operationId: findAllMarcas
+      security:
+        - basicAuth: []
+      responses:
+        '200':
+          description: Operacion con exito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MarcaResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+        - Marcas
+      summary: Inserta un marca en el sistema
+      description: Inserta un marca en el sistema
+      operationId: insertMarca
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarcaRequest'
+      responses:
+        '200':
+          description: Operacion con exito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarcaResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+        - Marcas
+      summary: Actualiza un marca en el sistema
+      description: Actualiza un marca en el sistema
+      operationId: updateMarca
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarcaRequest'
+      responses:
+        '200':
+          description: Operacion con exito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarcaResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal server error
+  /marcas/{id}:
+    delete:
+      tags:
+        - Marcas
+      summary: Borra un marca en el sistema
+      description: Borra un marca en el sistema
+      operationId: deleteMarca
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: id del marca a borrar
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Operacion con exito
+        '400':
+          description: Id del marca no valido
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '500':
