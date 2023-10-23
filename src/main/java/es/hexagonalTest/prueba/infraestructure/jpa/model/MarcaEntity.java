@@ -28,6 +28,7 @@ public class MarcaEntity implements Serializable{
     @Column(name = "ID")
     private Long id;
 	
+	@Column(name = "NOMBRE_MARCA")
 	private String nombreMarca;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "marca", orphanRemoval = true)

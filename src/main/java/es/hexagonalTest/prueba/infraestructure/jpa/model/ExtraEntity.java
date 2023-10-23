@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "extras")
+@Table(name = "EXTRAS")
 @Data
 public class ExtraEntity implements Serializable{
 
@@ -31,7 +31,7 @@ public class ExtraEntity implements Serializable{
 	private String nombre;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "coches_id", nullable = false, updatable = false, insertable = false)
+	@JoinColumn(name = "COCHES_ID", nullable = false, updatable = false, insertable = false)
 	private CocheEntity coche;
 
 }

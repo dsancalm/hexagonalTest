@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "coches")
+@Table(name = "COCHES")
 @Data
 public class CocheEntity implements Serializable {
 
@@ -30,12 +30,16 @@ public class CocheEntity implements Serializable {
 	@Column(name = "ID")
 	private Long id;
 
+	@Column(name = "NOMBRE_MODELO")
 	private String nombreModelo;
 
+	@Column(name = "COLOR")
 	private String color;
-
+	
+	@Column(name = "CILINDRADA")
 	private int cilindrada;
 
+	@Column(name = "POTENCIA")
 	private int potencia;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "coche", orphanRemoval = true)
@@ -45,7 +49,7 @@ public class CocheEntity implements Serializable {
 	private List<ExtraEntity> extras;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "marca_id", nullable = false, updatable = false, insertable = false)
+	@JoinColumn(name = "MARCA_ID", nullable = false, updatable = false, insertable = false)
 	private MarcaEntity marca;
 
 }

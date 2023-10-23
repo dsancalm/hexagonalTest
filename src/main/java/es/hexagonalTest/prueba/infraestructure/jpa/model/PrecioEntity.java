@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "precios")
+@Table(name = "PRECIOS")
 @Data
 public class PrecioEntity implements Serializable{
 
@@ -29,13 +29,16 @@ public class PrecioEntity implements Serializable{
 	@Column(name = "ID")
 	private Long id;
 
+	@Column(name = "START_DATE")
 	private Date startDate;
 
+	@Column(name = "END_DATE")
 	private Date endDate;
 
+	@Column(name = "PRICE")
 	private BigDecimal price;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "coches_id", nullable = false, updatable = false, insertable = false)
+	@JoinColumn(name = "COCHES_ID", nullable = false, updatable = false, insertable = false)
 	private CocheEntity coche;
 }
