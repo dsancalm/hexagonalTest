@@ -1,4 +1,4 @@
-package es.hexagonalTest.prueba.infraestructure.jpa.mapper;
+package es.hexagonalTest.prueba.infraestructure.jpa.mapper.simple;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -1,10 +1,11 @@
-package es.hexagonalTest.prueba.infraestructure.jpa.mapper;
+package es.hexagonalTest.prueba.infraestructure.jpa.mapper.full;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 
 import es.hexagonalTest.prueba.domain.Marca;
 import es.hexagonalTest.prueba.infraestructure.jpa.mapper.base.BaseMapperEntity;
+import es.hexagonalTest.prueba.infraestructure.jpa.mapper.simple.CocheMapperSimple;
 import es.hexagonalTest.prueba.infraestructure.jpa.model.MarcaEntity;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {CocheMapperSimple.class})

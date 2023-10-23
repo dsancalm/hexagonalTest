@@ -19,25 +19,33 @@ public abstract class BaseDAOImpl<T, S extends Serializable> implements IBaseDao
 	@Override
 	public T save(T entity) {
 		log.debug("Entrando en el metodo 'save' con el objeto: " + entity);
-		return null;
+		S saved = this.getRepository().save(this.getDefaultMapper().domainToEntity(entity));
+		return this.getDefaultMapper().entityToDomain(saved);
 	}
 
 	@Override
 	public T update(T entity) {
 		log.debug("Entrando en el metodo 'update' con el objeto: " + entity);
-		return null;
+		S updated = this.getRepository().save(this.getDefaultMapper().domainToEntity(entity));
+		return this.getDefaultMapper().entityToDomain(updated);
 	}
 
 	@Override
 	public int remove(T entity) {
 		log.debug("Entrando en el metodo 'remove' con el objeto: " + entity);
+		try {
+			this.getRepository().delete(this.getDefaultMapper().domainToEntity(entity));
+		} catch (Exception e) {
+			log.error("Error al borrar la entidad: " + entity, e);
+			return -1;
+		}
 		return 0;
 	}
 
 	@Override
 	public List<T> findAll() {
 		log.debug("Entrando en el metodo 'findAll'");
-		return null;
+		return this.getDefaultMapper().entitiesToDomains(this.getRepository().findAll());
 	}
 
 }
