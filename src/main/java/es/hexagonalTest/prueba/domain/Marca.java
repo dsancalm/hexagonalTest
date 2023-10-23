@@ -2,12 +2,13 @@ package es.hexagonalTest.prueba.domain;
 
 import java.util.List;
 
+import es.hexagonalTest.prueba.domain.base.BaseDomain;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class Marca {
-	
-	private Long id;
+@EqualsAndHashCode(callSuper=true)
+public class Marca extends BaseDomain  {
 	
 	private String nombreMarca;
 	

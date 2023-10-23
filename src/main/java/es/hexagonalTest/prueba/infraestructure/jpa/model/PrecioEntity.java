@@ -12,11 +12,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedAttributeNode;
+import jakarta.persistence.NamedEntityGraph;
+import jakarta.persistence.NamedEntityGraphs;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
 @Table(name = "PRECIOS")
+@NamedEntityGraphs(value = { 
+		@NamedEntityGraph(name = "PrecioEntity.Full", attributeNodes = {@NamedAttributeNode("coche")}) 
+	})
 @Data
 public class PrecioEntity implements Serializable{
 

@@ -12,12 +12,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedAttributeNode;
+import jakarta.persistence.NamedEntityGraph;
+import jakarta.persistence.NamedEntityGraphs;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
 @Table(name = "COCHES")
+@NamedEntityGraphs(value = { 
+		@NamedEntityGraph(name = "CocheEntity.Full", attributeNodes = {@NamedAttributeNode("marca")}) 
+	})
 @Data
 public class CocheEntity implements Serializable {
 
@@ -49,7 +55,7 @@ public class CocheEntity implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "coche", orphanRemoval = true)
 	private List<ExtraEntity> extras;
 
-	@ManyToOne(optional = false, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "MARCA_ID", nullable = false, updatable = false, insertable = true)
 	private MarcaEntity marca;
 

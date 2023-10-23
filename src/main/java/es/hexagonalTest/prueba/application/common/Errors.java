@@ -8,7 +8,7 @@ import lombok.Getter;
 public enum Errors {
 
 	ERROR_SAVE("error.save"), ERROR_UPDATE("error.update"), ERROR_DELETE("error.delete"),
-	ERROR_GENERIC("error.generic");
+	ERROR_NOT_FOUND("error.not.found"), ERROR_GENERIC("error.generic");
 
 	private String code;
 

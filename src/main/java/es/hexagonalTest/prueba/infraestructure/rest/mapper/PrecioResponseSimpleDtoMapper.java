@@ -8,8 +8,8 @@ import es.hexagonalTest.prueba.domain.Precio;
 import es.hexagonalTest.prueba.infraestructure.rest.mapper.base.BaseMapperResponseDto;
 import es.hexagonalTest.prueba.infraestructure.rest.model.PrecioResponseDto;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = CocheResponseDtoMapper.class)
-public interface PrecioResponseDtoMapper extends BaseMapperResponseDto<Precio, PrecioResponseDto> {
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+public interface PrecioResponseSimpleDtoMapper extends BaseMapperResponseDto<Precio, PrecioResponseDto> {
 	
 	@Override
 	@Mapping(source = "price", target = "precio")

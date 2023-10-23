@@ -8,10 +8,11 @@ import es.hexagonalTest.prueba.application.common.exceptions.UpdateException;
 import es.hexagonalTest.prueba.application.common.responses.ResponseService;
 import es.hexagonalTest.prueba.application.interfaces.base.IBaseDao;
 import es.hexagonalTest.prueba.application.interfaces.base.IBaseService;
+import es.hexagonalTest.prueba.domain.base.BaseDomain;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public abstract class BaseServiceImpl<T> implements IBaseService<T> {
+public abstract class BaseServiceImpl<T extends BaseDomain> implements IBaseService<T> {
 
 	protected abstract IBaseDao<T> getDefaultDao();
 
@@ -33,8 +34,11 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
 	public ResponseService<T> update(T domain) {
 		log.debug("Entrando en el metodo 'update' con el objeto: " + domain);
 		ResponseService<T> respuesta = new ResponseService<>();
+		if (!this.getDefaultDao().existsOne(domain.getId())) {
+			return new ResponseService<>(Errors.ERROR_NOT_FOUND);
+		}
 		try {
-			respuesta.setData(this.getDefaultDao().update(domain));
+			respuesta.setData(this.getDefaultDao().save(domain));
 			return respuesta;
 		} catch (UpdateException e) {
 			return new ResponseService<>(Errors.ERROR_UPDATE);

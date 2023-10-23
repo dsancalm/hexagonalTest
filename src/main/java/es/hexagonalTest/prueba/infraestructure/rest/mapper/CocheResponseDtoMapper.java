@@ -12,7 +12,7 @@ import es.hexagonalTest.prueba.domain.Extra;
 import es.hexagonalTest.prueba.infraestructure.rest.mapper.base.BaseMapperResponseDto;
 import es.hexagonalTest.prueba.infraestructure.rest.model.CocheResponseDto;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {PrecioResponseDtoMapper.class, MarcaResponseSimpleDtoMapper.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {PrecioResponseSimpleDtoMapper.class, MarcaResponseSimpleDtoMapper.class})
 public interface CocheResponseDtoMapper extends BaseMapperResponseDto<Coche, CocheResponseDto> {
 	
 	@Override
@@ -20,7 +20,7 @@ public interface CocheResponseDtoMapper extends BaseMapperResponseDto<Coche, Coc
 	CocheResponseDto domainToDto(Coche domain);
 	
 	default String map(List<Extra> value) {
-		return value.stream().map(Extra::getNombre).collect(Collectors.joining(", "));
+		return (value!=null && !value.isEmpty()) ? value.stream().map(Extra::getNombre).collect(Collectors.joining(", ")) : "";
 
 	}
 
