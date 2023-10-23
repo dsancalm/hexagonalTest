@@ -135,7 +135,7 @@ components:
         precio:
           type: number
           format : float
-    Marca:
+    MarcaRequest:
       type: object
       properties:
         id:
@@ -143,8 +143,18 @@ components:
           format: int32
         nombre:
           type: string
-        coche:
-          $ref: '#/components/schemas/CocheResponse'
+    MarcaResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        coches:
+          type: array
+          items:
+            $ref: '#/components/schemas/CocheResponse'
     ExtraRequest:
       type: object
       properties:
@@ -179,16 +189,8 @@ components:
         potencia:
           type: integer
           format: int32
-        extras:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExtraRequest'
-        precios:
-          type: array
-          items:
-            $ref: '#/components/schemas/PrecioRequest'
         marca:
-          $ref: '#/components/schemas/Marca'
+          $ref: '#/components/schemas/MarcaRequest'
     CocheResponse:
       type: object
       properties:
@@ -212,7 +214,7 @@ components:
           items:
             $ref: '#/components/schemas/PrecioResponse'
         marca:
-          $ref: '#/components/schemas/Marca'
+          $ref: '#/components/schemas/MarcaResponse'
   securitySchemes:
     basicAuth:     # <-- arbitrary name for the security scheme
       type: http

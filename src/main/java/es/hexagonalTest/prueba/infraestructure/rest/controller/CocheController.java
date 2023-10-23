@@ -53,12 +53,21 @@ public class CocheController implements CochesApi {
 
 	@Override
 	public ResponseEntity<CocheResponseDto> insertCoche(@Valid CocheRequestDto cocheDto) {
-		return ResponseEntity.ok().build();
+		try {
+			return ResponseEntity.ok(mapperResponse.domainToDto(service.save(mapperRequest.dtoToDomain(cocheDto))));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.internalServerError().build();
+		}
 	}
 
 	@Override
 	public ResponseEntity<CocheResponseDto> updateCoche(@Valid CocheRequestDto cocheDto) {
-		return ResponseEntity.ok().build();
+		try {
+			return ResponseEntity.ok(mapperResponse.domainToDto(service.update(mapperRequest.dtoToDomain(cocheDto))));
+		} catch (Exception e) {
+			return ResponseEntity.internalServerError().build();
+		}
 	}
 
 }
