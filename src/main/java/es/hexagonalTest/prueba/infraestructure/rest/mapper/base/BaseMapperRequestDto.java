@@ -6,16 +6,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public interface BaseMapperDto<E, D> {
-
-	D domainToDto(E domain);
+public interface BaseMapperRequestDto<E, D> {
 
 	E dtoToDomain(D dto);
-
-	default List<D> domainToDtos(List<E> domains) {
-		return Optional.ofNullable(domains).map(Collection::stream).orElseGet(Stream::empty).map(this::domainToDto)
-				.collect(Collectors.toList());
-	}
 
 	default List<E> dtosToDomains(List<D> dtos) {
 		return Optional.ofNullable(dtos).map(Collection::stream).orElseGet(Stream::empty).map(this::dtoToDomain)

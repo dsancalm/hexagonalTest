@@ -22,7 +22,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Coche'
+                  $ref: '#/components/schemas/CocheResponse'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '500':
@@ -39,14 +39,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Coche'
+              $ref: '#/components/schemas/CocheRequest'
       responses:
         '200':
           description: Operacion con exito
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Coche'
+                $ref: '#/components/schemas/CocheResponse'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '500':
@@ -63,14 +63,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Coche'
+              $ref: '#/components/schemas/CocheRequest'
       responses:
         '200':
           description: Operacion con exito
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Coche'
+                $ref: '#/components/schemas/CocheResponse'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '500':
@@ -103,7 +103,7 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Precio:
+    PrecioRequest:
       type: object
       properties:
         id:
@@ -119,7 +119,22 @@ components:
           type: number
           format : float
         coche:
-          $ref: '#/components/schemas/Coche'
+          $ref: '#/components/schemas/CocheRequest'
+    PrecioResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        precio:
+          type: number
+          format : float
     Marca:
       type: object
       properties:
@@ -128,7 +143,9 @@ components:
           format: int32
         nombre:
           type: string
-    Extra:
+        coche:
+          $ref: '#/components/schemas/CocheResponse'
+    ExtraRequest:
       type: object
       properties:
         id:
@@ -137,8 +154,16 @@ components:
         nombre:
           type: string
         coche:
-          $ref: '#/components/schemas/Coche'
-    Coche:
+          $ref: '#/components/schemas/CocheRequest'
+    ExtraResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+    CocheRequest:
       type: object
       properties:
         id:
@@ -157,11 +182,35 @@ components:
         extras:
           type: array
           items:
-            $ref: '#/components/schemas/Extra'
+            $ref: '#/components/schemas/ExtraRequest'
         precios:
           type: array
           items:
-            $ref: '#/components/schemas/Precio'
+            $ref: '#/components/schemas/PrecioRequest'
+        marca:
+          $ref: '#/components/schemas/Marca'
+    CocheResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        modelo:
+          type: string
+        color:
+          type: string
+        cilindrada:
+          type: integer
+          format: int32
+        potencia:
+          type: integer
+          format: int32
+        extras:
+          type: string
+        precios:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrecioResponse'
         marca:
           $ref: '#/components/schemas/Marca'
   securitySchemes:

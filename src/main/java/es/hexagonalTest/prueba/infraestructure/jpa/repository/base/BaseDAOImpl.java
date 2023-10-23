@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import es.hexagonalTest.prueba.application.common.exceptions.DaoException;
 import es.hexagonalTest.prueba.application.interfaces.base.IBaseDao;
 import es.hexagonalTest.prueba.infraestructure.jpa.mapper.base.BaseMapperEntity;
 import lombok.extern.slf4j.Slf4j;
@@ -31,13 +32,13 @@ public abstract class BaseDAOImpl<T, S extends Serializable> implements IBaseDao
 	}
 
 	@Override
-	public int remove(T entity) {
+	public int remove(T entity) throws DaoException {
 		log.debug("Entrando en el metodo 'remove' con el objeto: " + entity);
 		try {
 			this.getRepository().delete(this.getDefaultMapper().domainToEntity(entity));
 		} catch (Exception e) {
 			log.error("Error al borrar la entidad: " + entity, e);
-			return -1;
+			throw new DaoException("Error al borrar la entidad: " + entity);
 		}
 		return 0;
 	}

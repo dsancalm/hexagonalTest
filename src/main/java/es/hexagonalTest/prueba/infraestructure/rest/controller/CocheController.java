@@ -8,40 +8,56 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.hexagonalTest.prueba.application.common.exceptions.ServiceException;
 import es.hexagonalTest.prueba.application.interfaces.services.CocheService;
+import es.hexagonalTest.prueba.domain.Coche;
 import es.hexagonalTest.prueba.infraestructure.rest.api.CochesApi;
-import es.hexagonalTest.prueba.infraestructure.rest.mapper.CocheDtoMapper;
-import es.hexagonalTest.prueba.infraestructure.rest.model.CocheDto;
+import es.hexagonalTest.prueba.infraestructure.rest.mapper.CocheRequestDtoMapper;
+import es.hexagonalTest.prueba.infraestructure.rest.mapper.CocheResponseDtoMapper;
+import es.hexagonalTest.prueba.infraestructure.rest.model.CocheRequestDto;
+import es.hexagonalTest.prueba.infraestructure.rest.model.CocheResponseDto;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @RestController
+@SecurityRequirement(name = "basicAuth")
 public class CocheController implements CochesApi {
 	
 	@Autowired
 	private CocheService service;
 	
 	@Autowired
-	private CocheDtoMapper mapper;
+	private CocheRequestDtoMapper mapperRequest;
+	
+	@Autowired
+	private CocheResponseDtoMapper mapperResponse;
 
 	@Override
 	public ResponseEntity<Void> deleteCoche(Integer id) {
+		Coche coche = new Coche();
+		coche.setId(Long.valueOf(id));
+		try {
+			service.remove(coche);
+		} catch (ServiceException e) {
+			return ResponseEntity.badRequest().build();
+		}
 		return ResponseEntity.ok().build();
 	}
 
 	@Override
-	public ResponseEntity<List<CocheDto>> findAll() {
+	public ResponseEntity<List<CocheResponseDto>> findAll() {
 		try {
-			return ResponseEntity.ok(mapper.domainToDtos(service.findAll())); 
+			return ResponseEntity.ok(mapperResponse.domainToDtos(service.findAll())); 
 		} catch (Exception e) {
 			return ResponseEntity.internalServerError().build();
 		}
 	}
 
 	@Override
-	public ResponseEntity<CocheDto> insertCoche(@Valid CocheDto cocheDto) {
+	public ResponseEntity<CocheResponseDto> insertCoche(@Valid CocheRequestDto cocheDto) {
 		return ResponseEntity.ok().build();
 	}
 
 	@Override
-	public ResponseEntity<CocheDto> updateCoche(@Valid CocheDto cocheDto) {
+	public ResponseEntity<CocheResponseDto> updateCoche(@Valid CocheRequestDto cocheDto) {
 		return ResponseEntity.ok().build();
 	}
 
