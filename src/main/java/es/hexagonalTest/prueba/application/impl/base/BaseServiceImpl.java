@@ -1,6 +1,5 @@
 package es.hexagonalTest.prueba.application.impl.base;
 
-import java.util.Collections;
 import java.util.List;
 
 import es.hexagonalTest.prueba.application.interfaces.base.IBaseDao;
@@ -33,7 +32,7 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T> {
 	@Override
 	public List<T> findAll() {
 		log.debug("Entrando en el metodo 'findAll'");
-		return Collections.emptyList();
+		return getDefaultDao().findAll();
 	}
 
 

@@ -46,8 +46,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/Coche'
+                $ref: '#/components/schemas/Coche'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '500':
@@ -71,8 +70,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/Coche'
+                $ref: '#/components/schemas/Coche'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '500':

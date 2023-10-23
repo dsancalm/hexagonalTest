@@ -12,13 +12,13 @@ public interface BaseMapperDto<E, D> {
 
 	E dtoToDomain(D dto);
 
-	default List<D> domainToEntities(List<E> domains) {
+	default List<D> domainToDtos(List<E> domains) {
 		return Optional.ofNullable(domains).map(Collection::stream).orElseGet(Stream::empty).map(this::domainToDto)
 				.collect(Collectors.toList());
 	}
 
-	default List<E> entitiesToDomains(List<D> entities) {
-		return Optional.ofNullable(entities).map(Collection::stream).orElseGet(Stream::empty).map(this::dtoToDomain)
+	default List<E> dtosToDomains(List<D> dtos) {
+		return Optional.ofNullable(dtos).map(Collection::stream).orElseGet(Stream::empty).map(this::dtoToDomain)
 				.collect(Collectors.toList());
 	}
 
