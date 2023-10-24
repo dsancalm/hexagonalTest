@@ -1,67 +1,45 @@
 package es.hexagonalTest.prueba;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import es.hexagonalTest.prueba.infraestructure.PruebaApplication;
+import es.hexagonalTest.prueba.infraestructure.rest.model.CocheResponseDto;
 
 @SpringBootTest(classes = PruebaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class SpringRestTest { 
-	
-	@Test
-	void testUno() {
-		
-	}
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class SpringRestTest {  
 
-	/*private final String BASE_URL = "http://localhost:8080/price";
-
-	private final String urlTemplate = UriComponentsBuilder.fromHttpUrl(BASE_URL).queryParam("idBrand", "{idBrand}")
-			.queryParam("idProduct", "{idProduct}").queryParam("fecha", "{fecha}").encode().toUriString();
+	private final String BASE_URL = "http://localhost:8080/";
 
 	private RestTemplate restTemplate = new RestTemplate();
 
-	private Map<String, Object> params;
-
-	@BeforeEach
-	public void generarMapa() {
-		params = new HashMap<String, Object>();
-		params.put("idBrand", 1);
-		params.put("idProduct", 35455);
-	}
 
 	@Test
+	@Order(1)
 	void testUno() {
-		params.put("fecha", "2020-06-14T10:00:00");
-		ResponseEntity<PricesDto> response = restTemplate.getForEntity(urlTemplate, PricesDto.class, params);
-		assertEquals(35.5f, response.getBody().getFinalPrice());
+		String urlTemplate = UriComponentsBuilder.fromHttpUrl(BASE_URL).path("coches").encode().toUriString();
+		ResponseEntity<CocheResponseDto[]> response = restTemplate.getForEntity(urlTemplate, CocheResponseDto[].class);
+		assertEquals("AMG", response.getBody()[0].getModelo());
 	}
-
+	
 	@Test
+	@Order(2)
 	void testDos() {
-		params.put("fecha", "2020-06-14T16:00:00");
-		ResponseEntity<PricesDto> response = restTemplate.getForEntity(urlTemplate, PricesDto.class, params);
-		assertEquals(25.45f, response.getBody().getFinalPrice());
+		String urlTemplate = UriComponentsBuilder.fromHttpUrl(BASE_URL).path("coches").encode().toUriString();
+		ResponseEntity<CocheResponseDto[]> response = restTemplate.getForEntity(urlTemplate, CocheResponseDto[].class);
+		response.getBody()[0].setModelo("AAA");
+		restTemplate.put(urlTemplate, response.getBody()[0]);
+		response = restTemplate.getForEntity(urlTemplate, CocheResponseDto[].class);
+		assertEquals("AAA", response.getBody()[0].getModelo());
 	}
-
-	@Test
-	void testTres() {
-		params.put("fecha", "2020-06-14T21:00:00");
-		ResponseEntity<PricesDto> response = restTemplate.getForEntity(urlTemplate, PricesDto.class, params);
-		assertEquals(35.5f, response.getBody().getFinalPrice());
-	}
-
-	@Test
-	void testCuatro() {
-		params.put("fecha", "2020-06-15T10:00:00");
-		ResponseEntity<PricesDto> response = restTemplate.getForEntity(urlTemplate, PricesDto.class, params);
-		assertEquals(30.50f, response.getBody().getFinalPrice());
-	}
-
-	@Test
-	void testCinco() {
-		params.put("fecha", "2020-06-15T21:00:00");
-		ResponseEntity<PricesDto> response = restTemplate.getForEntity(urlTemplate, PricesDto.class, params);
-		assertEquals(38.95f, response.getBody().getFinalPrice());
-	}*/
 
 }
