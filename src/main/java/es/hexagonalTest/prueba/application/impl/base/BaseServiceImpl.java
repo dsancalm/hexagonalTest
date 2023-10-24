@@ -50,6 +50,9 @@ public abstract class BaseServiceImpl<T extends BaseDomain> implements IBaseServ
 	@Override
 	public ResponseService<T> remove(T domain) {
 		log.debug("Entrando en el metodo 'remove' con el objeto: " + domain);
+		if (!this.getDefaultDao().existsOne(domain.getId())) {
+			return new ResponseService<>(Errors.ERROR_NOT_FOUND);
+		}
 		try {
 			this.getDefaultDao().remove(domain);
 		} catch (DeleteException e) {

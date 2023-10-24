@@ -4,9 +4,13 @@ info:
   version: 1.0.0
 tags:
   - name: Coches
+    description: Conjunto de llamadas disponibles para el CRUD de coches
   - name: Extras
+    description: Conjunto de llamadas disponibles para el CRUD de extras
   - name: Marcas
+    description: Conjunto de llamadas disponibles para el CRUD de marcas
   - name: Precios
+    description: Conjunto de llamadas disponibles para el CRUD de precios
 paths:
   /coches:
     get:
@@ -34,7 +38,7 @@ paths:
       tags:
         - Coches
       summary: Inserta un coche en el sistema
-      description: Inserta un coche en el sistema
+      description: Inserta un coche en el sistema, el id no es necesario informarlo ya que se genera automaticamente por la app. Es importante indicar el menos el ´id´ de la marca que tiene el coche, para relacionarlo.
       operationId: insertCoche
       security:
         - basicAuth: []
@@ -58,7 +62,7 @@ paths:
       tags:
         - Coches
       summary: Actualiza un coche en el sistema
-      description: Actualiza un coche en el sistema
+      description: Actualiza un coche en el sistema, si no encuentra un coche a actualizar, devolvera un NOT FOUND
       operationId: updateCoche
       security:
         - basicAuth: []
@@ -85,7 +89,7 @@ paths:
       tags:
         - Coches
       summary: Borra un coche en el sistema
-      description: Borra un coche en el sistema
+      description: Borra un coche en el sistema, si no encuentra un coche a borrar, devolvera un NOT FOUND
       operationId: deleteCoche
       security:
         - basicAuth: []
@@ -104,6 +108,8 @@ paths:
           description: Id del coche no valido
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Not found
         '500':
           description: Internal server error
   /extras:
@@ -132,7 +138,7 @@ paths:
       tags:
         - Extras
       summary: Inserta un extra en el sistema
-      description: Inserta un extra en el sistema
+      description: Inserta un extra en el sistema, el id no es necesario informarlo ya que se genera automaticamente por la app. Es importante indicar el menos el ´id´ del coche, para relacionarlo.
       operationId: insertExtra
       security:
         - basicAuth: []
@@ -156,7 +162,7 @@ paths:
       tags:
         - Extras
       summary: Actualiza un extra en el sistema
-      description: Actualiza un extra en el sistema
+      description: Actualiza un extra en el sistema, si no encuentra un coche a actualizar, devolvera un NOT FOUND
       operationId: updateExtra
       security:
         - basicAuth: []
@@ -183,7 +189,7 @@ paths:
       tags:
         - Extras
       summary: Borra un extra en el sistema
-      description: Borra un extra en el sistema
+      description: Borra un extra en el sistema, si no encuentra un coche a borrar, devolvera un NOT FOUND
       operationId: deleteExtra
       security:
         - basicAuth: []
@@ -202,6 +208,8 @@ paths:
           description: Id del extra no valido
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Not found
         '500':
           description: Internal server error
   /precios:
@@ -230,7 +238,7 @@ paths:
       tags:
         - Precios
       summary: Inserta un precio en el sistema
-      description: Inserta un precio en el sistema
+      description: Inserta un precio en el sistema, el id no es necesario informarlo ya que se genera automaticamente por la app. Es importante indicar el menos el ´id´ del coche, para relacionarlo.
       operationId: insertPrecio
       security:
         - basicAuth: []
@@ -254,7 +262,7 @@ paths:
       tags:
         - Precios
       summary: Actualiza un precio en el sistema
-      description: Actualiza un precio en el sistema
+      description: Actualiza un precio en el sistema, si no encuentra un precio a borrar, devolvera un NOT FOUND
       operationId: updatePrecio
       security:
         - basicAuth: []
@@ -281,7 +289,7 @@ paths:
       tags:
         - Precios
       summary: Borra un precio en el sistema
-      description: Borra un precio en el sistema
+      description: Borra un precio en el sistema, si no encuentra un precio a borrar, devolvera un NOT FOUND
       operationId: deletePrecio
       security:
         - basicAuth: []
@@ -300,6 +308,8 @@ paths:
           description: Id del precio no valido
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Not found
         '500':
           description: Internal server error
   /marcas:
@@ -328,7 +338,7 @@ paths:
       tags:
         - Marcas
       summary: Inserta un marca en el sistema
-      description: Inserta un marca en el sistema
+      description: Inserta un marca en el sistema, el id no es necesario informarlo ya que se genera automaticamente por la app.
       operationId: insertMarca
       security:
         - basicAuth: []
@@ -352,7 +362,7 @@ paths:
       tags:
         - Marcas
       summary: Actualiza un marca en el sistema
-      description: Actualiza un marca en el sistema
+      description: Actualiza un marca en el sistema, si no encuentra una marca a actualizar, devolvera un NOT FOUND
       operationId: updateMarca
       security:
         - basicAuth: []
@@ -379,7 +389,7 @@ paths:
       tags:
         - Marcas
       summary: Borra un marca en el sistema
-      description: Borra un marca en el sistema
+      description: Borra un marca en el sistema, si no encuentra una marca a borrar, devolvera un NOT FOUND
       operationId: deleteMarca
       security:
         - basicAuth: []
@@ -398,6 +408,8 @@ paths:
           description: Id del marca no valido
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Not found
         '500':
           description: Internal server error
 components:

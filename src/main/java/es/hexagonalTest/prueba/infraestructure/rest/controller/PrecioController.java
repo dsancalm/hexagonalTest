@@ -39,6 +39,9 @@ public class PrecioController implements PreciosApi {
 		precio.setId(Long.valueOf(id));
 		ResponseService<Precio> respuestaServicio = service.remove(precio);
 		if (respuestaServicio.hasError()) {
+			if (respuestaServicio.getErrorCode().equals(Errors.ERROR_NOT_FOUND)) {
+				return ResponseEntity.notFound().build();
+			}
 			return ResponseEntity.internalServerError().header(ERROR_CODE, respuestaServicio.getErrorCode().getCode()).build();
 		}
 		return ResponseEntity.ok().build();

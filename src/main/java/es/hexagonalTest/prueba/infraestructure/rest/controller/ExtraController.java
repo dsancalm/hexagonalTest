@@ -39,6 +39,9 @@ public class ExtraController implements ExtrasApi {
 		precio.setId(Long.valueOf(id));
 		ResponseService<Extra> respuestaServicio = service.remove(precio);
 		if (respuestaServicio.hasError()) {
+			if (respuestaServicio.getErrorCode().equals(Errors.ERROR_NOT_FOUND)) {
+				return ResponseEntity.notFound().build();
+			}
 			return ResponseEntity.internalServerError().header(ERROR_CODE, respuestaServicio.getErrorCode().getCode()).build();
 		}
 		return ResponseEntity.ok().build();
