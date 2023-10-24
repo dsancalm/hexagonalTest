@@ -3,6 +3,9 @@ package es.hexagonalTest.prueba.application.common;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * Conjunto de errores que puede devolver la capa APP
+ */
 @AllArgsConstructor
 @Getter
 public enum Errors {

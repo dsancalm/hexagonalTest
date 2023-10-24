@@ -5,6 +5,11 @@ import java.util.List;
 import es.hexagonalTest.prueba.application.common.exceptions.DaoException;
 import es.hexagonalTest.prueba.domain.base.BaseDomain;
 
+/**
+ * Conector para la capa de infraestructura
+ *
+ * @param <T> the generic type
+ */
 public interface IBaseDao<T extends BaseDomain> {
 	T save(T entity) throws DaoException;
 

@@ -11,6 +11,11 @@ import es.hexagonalTest.prueba.application.interfaces.base.IBaseService;
 import es.hexagonalTest.prueba.domain.base.BaseDomain;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Clase generica de la capa de APP que implementa los metodos basicos para el CRUD
+ *
+ * @param <T> the generic type
+ */
 @Slf4j
 public abstract class BaseServiceImpl<T extends BaseDomain> implements IBaseService<T> {
 

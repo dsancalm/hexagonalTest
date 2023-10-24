@@ -3,7 +3,7 @@ package es.hexagonalTest.prueba.application.common.exceptions;
 import lombok.experimental.StandardException;
 
 /**
- * Excepcion generica para el DAO
+ * Excepcion cuando el DAO no puede eliminar
  */
 @StandardException
 public class DeleteException extends DaoException{

@@ -7,6 +7,11 @@ import es.hexagonalTest.prueba.application.common.Errors;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Clase generica para la respuesta de la capa APP
+ *
+ * @param <T> the generic type
+ */
 @Data
 @NoArgsConstructor
 public class ResponseService<T> {

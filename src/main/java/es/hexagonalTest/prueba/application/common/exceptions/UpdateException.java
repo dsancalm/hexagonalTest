@@ -3,7 +3,7 @@ package es.hexagonalTest.prueba.application.common.exceptions;
 import lombok.experimental.StandardException;
 
 /**
- * Excepcion generica para el DAO
+ * Excepcion cuando el DAO no puede actualizar
  */
 @StandardException
 public class UpdateException extends DaoException{

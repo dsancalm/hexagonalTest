@@ -14,6 +14,12 @@ import es.hexagonalTest.prueba.domain.base.BaseDomain;
 import es.hexagonalTest.prueba.infraestructure.jpa.mapper.base.BaseMapperEntity;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Clase generica del DAO para las operaciones CRUD
+ *
+ * @param <T> the generic type
+ * @param <S> the generic type
+ */
 @Slf4j
 public abstract class BaseDAOImpl<T extends BaseDomain, S extends Serializable> implements IBaseDao<T> {
 
